@@ -61,8 +61,23 @@ li a:hover {
   color: black;
 }
 
-li.liContact {
+.sub-navbar {
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+li.register {
+  width: 150px;
+}
+
+ul li.login {
+  width: 150px;
+}
+
+li.liContact {
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -73,7 +88,6 @@ a.aContact {
   height: 35px;
   line-height: 35px;
   margin: auto;
-  margin-right: 30px;
   background-color: rgb(209, 138, 254);
   border: 1px solid rgb(177, 4, 245);
   border-radius: 20px;

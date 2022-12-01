@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>contact</title>
     <link rel="icon" href="public/assets/img/logo.png">
-    <link rel="stylesheet" href="public/css/contact.css">
+    <link rel="stylesheet" href="public/css/contact1.css">
 </head>
 <body>
       <!-- Navbar -->
@@ -20,8 +20,19 @@
         <ul>
             <li class="logo"><img src="public/assets/img/logo.png"></li>
             <li><a href="/">Home</a></li>
-            <li><a href="/project">My Project</a></li>
-            <li class="liContact"><a href="/contact" class="aContact active">Contact Me</a></li>
+            {{if .Login.IsLogin}}
+            <li><a href="/project" class="">My Project</a></li>
+            {{end}}
+            <div class="sub-navbar">
+                {{if .Login.IsLogin}}
+                <li class="register"><a href="">Hello, {{.Login.Name}} </a></li>
+                <li class="login"><a href="/logout" onclick="return confirm('Are you sure?')">Logout</a></li>
+                {{else}}
+                <li class="register"><a href="/register">Register</a></li>
+                <li class="login"><a href="/login">Login</a></li>
+                {{end}}
+                <li class="liContact"><a href="/contact" class="aContact">Contact Me</a></li>
+            </div>
         </ul>
     </nav>
 

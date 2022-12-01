@@ -94,7 +94,6 @@ func HandleHome(w http.ResponseWriter, r *http.Request) { //ResponseWriter: untu
 	// Kemudian tampilkan seluruh data dari database
 	w.WriteHeader(http.StatusOK)
 	tmpt.Execute(w, data)
-	fmt.Println(data)
 }
 
 // Function Route Project
@@ -114,14 +113,33 @@ func HandleProject(w http.ResponseWriter, r *http.Request) {
 func HandleContact(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "text/html; charset=utf-8")
 
-	result, err := template.ParseFiles("views/contact.html")
+	temp, err := template.ParseFiles("views/contact.html")
 
 	if err != nil {
 		w.Write([]byte("Message : " + err.Error()))
 		return
-	} else {
-		result.Execute(w, nil)
 	}
+
+	// Session. Tangkap session yang bernama SESSION_ID yang dikirm dari login
+	var store = sessions.NewCookieStore([]byte("SESSION_ID"))
+	session, _ := store.Get(r, "SESSION_ID")
+
+	// Panggil struct Metadata untuk menampung data session
+	var login model.MetaData
+
+	// Masukkan data ke variabel login sesuai dengan kondisi login yang didapatkan dari session
+	if session.Values["IsLogin"] != true {
+		login.IsLogin = false
+	} else {
+		login.IsLogin = session.Values["IsLogin"].(bool)
+		login.Name = session.Values["Name"].(string)
+	}
+
+	data := map[string]interface{}{
+		"Login": login,
+	}
+
+	temp.Execute(w, data)
 }
 
 // Function Detail Project

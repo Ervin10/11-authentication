@@ -31,8 +31,8 @@ func main() {
 	route.HandleFunc("/login", handler.HandleLogin)
 	route.HandleFunc("/logout", handler.HandleLogout)
 
-	fmt.Println("Server sedang berjalan di port 4600")
-	http.ListenAndServe("Localhost:4600", route) // panggil untuk dapat diakses di browser par1: string, par2: route
+	fmt.Println("Server sedang berjalan di port 4700")
+	http.ListenAndServe("Localhost:4700", route) // panggil untuk dapat diakses di browser par1: string, par2: route
 }
 
 // Cara insert table manual
