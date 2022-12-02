@@ -244,13 +244,26 @@ button:hover {
     display: none;
   }
 
-  .navbar ul li.liContact {
+  .sub-navbar {
     display: flex;
-    height: 70px;
+    flex-direction: column;
+    padding: 0px;
+    margin: 0px;
+    z-index: 1;
+  }
+
+  .sub-navbar li.login {
+    width: 100%;
+    margin: 0px;
+  }
+
+  .sub-navbar li.liContact {
+    display: flex;
+    height: 100px;
     padding: 0px;
   }
 
-  .navbar a.aContact {
+  .sub-navbar a.aContact {
     width: 100%;
     height: 70px;
     line-height: 70px;
@@ -261,7 +274,7 @@ button:hover {
     margin: auto;
   }
 
-  .navbar a.aContact:hover {
+  .sub-navbar a.aContact:hover {
     box-shadow: none;
     background-color: rgb(224, 160, 244);
     transition: none;

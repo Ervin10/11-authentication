@@ -14,6 +14,8 @@ type Project struct {
 	Desc        string
 	Tech        []string
 	Image       string
+	// Author      string
+	// IsLogin     bool
 }
 
 type User struct {

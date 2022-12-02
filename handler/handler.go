@@ -45,6 +45,7 @@ func HandleHome(w http.ResponseWriter, r *http.Request) { //ResponseWriter: untu
 	} else {
 		login.IsLogin = session.Values["IsLogin"].(bool)
 		login.Name = session.Values["Name"].(string)
+		login.Id = session.Values["Id"].(int)
 	}
 
 	fm := session.Flashes("message")
@@ -62,8 +63,10 @@ func HandleHome(w http.ResponseWriter, r *http.Request) { //ResponseWriter: untu
 	login.FlashData = strings.Join(flashes, "")
 	// End session
 
-	// Query data dari database. context.background adalah
-	dataProject, err := connection.Conn.Query(context.Background(), "SELECT id, project_name, start_date, end_date, description, technologies, image FROM tb_projects") // Query mengembalikan 2 nilai
+	// dataProject, err := connection.Conn.Query(context.Background(), "SELECT tb_projects.id, project_name, start_date, end_date, description, technologies, image, author_id, tb_users.username FROM tb_projects LEFT JOIN tb_users ON tb_projects.id = tb_users.id ORDER BY id DESC")
+
+	// Query data dari database. Query mengembalikan 2 nilai
+	dataProject, err := connection.Conn.Query(context.Background(), "SELECT id, project_name, start_date, end_date, description, technologies, image FROM tb_projects")
 	if err != nil {
 		w.Write([]byte("Message :" + err.Error()))
 		return
@@ -82,6 +85,13 @@ func HandleHome(w http.ResponseWriter, r *http.Request) { //ResponseWriter: untu
 			w.Write([]byte("Message : " + err.Error()))
 			return
 		}
+
+		// if session.Values["IsLogin"] != true {
+		// 	data.IsLogin = false
+		// } else {
+		// 	data.IsLogin = session.Values["IsLogin"].(bool)
+		// }
+
 		result = append(result, data)
 	}
 
